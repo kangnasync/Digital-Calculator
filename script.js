@@ -1,5 +1,5 @@
-const currentDisplay = document.getElementById(".current-display");
-const previousDisplay = document.getElementById(".previous-display");
+const currentDisplay = document.querySelector(".current-display");
+const previousDisplay = document.querySelector(".previous-display");
 
 let currentValue = "";
 let previousValue = "";
