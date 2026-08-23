@@ -155,82 +155,39 @@ function deleteNumber() {
 
 // Number buttons
 document.querySelectorAll("[data-number]").forEach(button => {
-
     button.addEventListener("click", () => {
-
         addNumber(button.dataset.number);
-
     });
-
 });
 
 
 // Operator buttons
-document.querySelectorAll(".operator").forEach(button => {
-
-    button.addEventListener("click", function () {
-
-        const selectedOperator =
-            this.getAttribute("data-operator");
-
-        chooseOperator(selectedOperator);
-
+document.querySelectorAll("[data-operator]").forEach(button => {
+    button.addEventListener("click", () => {
+        chooseOperator(button.dataset.operator);
     });
-
 });
 
 
-// Equal button
-document
-    .querySelector('[data-action="calculate"]')
-    .addEventListener("click", calculate);
+// All action buttons
+document.querySelectorAll("[data-action]").forEach(button => {
 
+    button.addEventListener("click", () => {
 
-// Clear button
-document
-    .querySelector('[data-action="clear"]')
-    .addEventListener("click", clearCalculator);
+        const action = button.dataset.action;
 
+        if (action === "calculate") {
+            calculate();
+        }
 
-// Delete button
-document
-    .querySelector('[data-action="delete"]')
-    .addEventListener("click", deleteNumber);
+        if (action === "clear") {
+            clearCalculator();
+        }
 
+        if (action === "delete") {
+            deleteNumber();
+        }
 
-// Keyboard support
-document.addEventListener("keydown", event => {
-
-    // Numbers and decimal
-    if (
-        (event.key >= "0" && event.key <= "9") ||
-        event.key === "."
-    ) {
-        addNumber(event.key);
-    }
-
-
-    // Operators
-    if (["+", "-", "*", "/", "%"].includes(event.key)) {
-        chooseOperator(event.key);
-    }
-
-
-    // Calculate
-    if (event.key === "Enter" || event.key === "=") {
-        calculate();
-    }
-
-
-    // Delete
-    if (event.key === "Backspace") {
-        deleteNumber();
-    }
-
-
-    // Clear
-    if (event.key === "Escape") {
-        clearCalculator();
-    }
+    });
 
 });
