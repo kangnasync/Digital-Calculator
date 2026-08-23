@@ -56,7 +56,8 @@ function chooseOperator(selectedOperator) {
 }
 
 function calculate() {
-    if (previousValue === "" || currentValue === "" || !operator) {
+
+    if (previousValue === "" || currentValue === "" || operator === null) {
         return;
     }
 
@@ -66,6 +67,7 @@ function calculate() {
     let result;
 
     switch (operator) {
+
         case "+":
             result = firstNumber + secondNumber;
             break;
@@ -93,15 +95,14 @@ function calculate() {
         case "%":
             result = firstNumber % secondNumber;
             break;
+
+        default:
+            return;
     }
 
-    currentValue = String(
-        Number.isInteger(result) ? result : Number(result.toFixed(10))
-    );
-
+    currentValue = String(result);
     previousValue = "";
     operator = null;
-    shouldResetDisplay = true;
 
     updateDisplay();
 }
