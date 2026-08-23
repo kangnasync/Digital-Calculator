@@ -6,7 +6,10 @@ let previousValue = "";
 let operator = null;
 let shouldResetDisplay = false;
 
+
+// Update display
 function updateDisplay() {
+
     currentDisplay.textContent = currentValue || "0";
 
     if (operator && previousValue !== "") {
@@ -16,7 +19,10 @@ function updateDisplay() {
     }
 }
 
+
+// Add numbers
 function addNumber(number) {
+
     if (shouldResetDisplay) {
         currentValue = "";
         shouldResetDisplay = false;
@@ -35,9 +41,12 @@ function addNumber(number) {
     }
 
     currentValue += number;
+
     updateDisplay();
 }
 
+
+// Choose operator
 function chooseOperator(selectedOperator) {
 
     if (currentValue === "") {
@@ -55,9 +64,15 @@ function chooseOperator(selectedOperator) {
     updateDisplay();
 }
 
+
+// Calculate result
 function calculate() {
 
-    if (previousValue === "" || currentValue === "" || operator === null) {
+    if (
+        previousValue === "" ||
+        currentValue === "" ||
+        operator === null
+    ) {
         return;
     }
 
@@ -81,10 +96,12 @@ function calculate() {
             break;
 
         case "/":
+
             if (secondNumber === 0) {
                 currentValue = "Error";
                 previousValue = "";
                 operator = null;
+
                 updateDisplay();
                 return;
             }
@@ -101,13 +118,19 @@ function calculate() {
     }
 
     currentValue = String(result);
+
     previousValue = "";
     operator = null;
+
+    shouldResetDisplay = true;
 
     updateDisplay();
 }
 
+
+// Clear calculator
 function clearCalculator() {
+
     currentValue = "";
     previousValue = "";
     operator = null;
@@ -116,39 +139,69 @@ function clearCalculator() {
     updateDisplay();
 }
 
+
+// Delete last number
 function deleteNumber() {
+
     if (shouldResetDisplay) {
         return;
     }
 
     currentValue = currentValue.slice(0, -1);
+
     updateDisplay();
 }
 
+
+// Number buttons
 document.querySelectorAll("[data-number]").forEach(button => {
+
     button.addEventListener("click", () => {
+
         addNumber(button.dataset.number);
+
     });
+
 });
 
+
+// Operator buttons
 document.querySelectorAll(".operator").forEach(button => {
+
     button.addEventListener("click", function () {
-        const selectedOperator = this.getAttribute("data-operator");
+
+        const selectedOperator =
+            this.getAttribute("data-operator");
+
         chooseOperator(selectedOperator);
+
     });
+
 });
-document.querySelector('[data-action="calculate"]')
+
+
+// Equal button
+document
+    .querySelector('[data-action="calculate"]')
     .addEventListener("click", calculate);
 
-document.querySelector('[data-action="clear"]')
+
+// Clear button
+document
+    .querySelector('[data-action="clear"]')
     .addEventListener("click", clearCalculator);
 
-document.querySelector('[data-action="delete"]')
+
+// Delete button
+document
+    .querySelector('[data-action="delete"]')
     .addEventListener("click", deleteNumber);
+
 
 // Keyboard support
 document.addEventListener("keydown", event => {
 
+    // Numbers and decimal
     if (
         (event.key >= "0" && event.key <= "9") ||
         event.key === "."
@@ -156,19 +209,28 @@ document.addEventListener("keydown", event => {
         addNumber(event.key);
     }
 
+
+    // Operators
     if (["+", "-", "*", "/", "%"].includes(event.key)) {
         chooseOperator(event.key);
     }
 
+
+    // Calculate
     if (event.key === "Enter" || event.key === "=") {
         calculate();
     }
 
+
+    // Delete
     if (event.key === "Backspace") {
         deleteNumber();
     }
 
+
+    // Clear
     if (event.key === "Escape") {
         clearCalculator();
     }
+
 });
