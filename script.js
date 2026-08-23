@@ -136,12 +136,12 @@ document.querySelectorAll("[data-number]").forEach(button => {
     });
 });
 
-document.querySelectorAll("[data-operator]").forEach(button => {
-    button.addEventListener("click", () => {
-        chooseOperator(button.dataset.operator);
+document.querySelectorAll(".operator").forEach(button => {
+    button.addEventListener("click", function () {
+        const selectedOperator = this.getAttribute("data-operator");
+        chooseOperator(selectedOperator);
     });
 });
-
 document.querySelector('[data-action="calculate"]')
     .addEventListener("click", calculate);
 
