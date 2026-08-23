@@ -36,6 +36,7 @@ Digital-Calculator\
 └── README.md
 
 Live Demo:
+https://kangnasync.github.io/Digital-Calculator/
 
 
  How to Run:
