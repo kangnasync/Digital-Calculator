@@ -24,7 +24,8 @@ Technologies Used:
 * Responsive Web Design
 
 Screenshot:
-![]
+![Digital Calculator Screenshot](Screenshot.png)
+![Digital Calculator Screenshot](Screenshot1.png)
 
 Project Structure:
 
