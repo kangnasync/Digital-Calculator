@@ -39,24 +39,18 @@ function addNumber(number) {
 }
 
 function chooseOperator(selectedOperator) {
-    if (currentValue === "" && previousValue === "") {
+
+    if (currentValue === "") {
         return;
     }
 
-    if (currentValue === "" && previousValue !== "") {
-        operator = selectedOperator;
-        updateDisplay();
-        return;
-    }
-
-    if (previousValue !== "" && operator) {
+    if (previousValue !== "" && operator !== null) {
         calculate();
     }
 
     previousValue = currentValue;
     operator = selectedOperator;
     currentValue = "";
-    shouldResetDisplay = false;
 
     updateDisplay();
 }
