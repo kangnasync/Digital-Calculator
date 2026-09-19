@@ -191,3 +191,25 @@ document.querySelectorAll("[data-action]").forEach(button => {
     });
 
 });
+document.addEventListener("keydown", (event) => {
+
+    if (event.key >= "0" && event.key <= "9") {
+        addNumber(event.key);
+    }
+    else if (event.key === ".") {
+        addNumber(".");
+    }       
+    else if (event.key === "+" || event.key === "-" || event.key === "*" || event.key === "/" || event.key === "%") {
+        chooseOperator(event.key);
+    }
+    else if (event.key === "Enter" || event.key === "=") {
+        event.preventDefault();
+        calculate();
+    }
+    else if (event.key === "Backspace") {
+        deleteNumber();
+    }
+    else if (event.key === "Escape") {
+        clearCalculator();
+    }
+});
